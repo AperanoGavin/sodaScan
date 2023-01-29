@@ -1,5 +1,28 @@
-<form action="/scan" method="post">
-    <label for="barcode">Enter Barcode:</label>
-    <input type="text" id="barcode" name="barcode">
-    <input type="submit" value="Submit">
-</form>
+<html>
+  <head>
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  </head>
+  <body>
+    <video id="preview"></video>
+    <form action="/scan" method="post">
+      <input type="hidden" id="barcode" name="barcode">
+      <input type="submit" value="Submit">
+    </form>
+    <script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (barcode) {
+        document.getElementById('barcode').value = barcode;
+        document.getElementsByTagName("form")[0].submit();
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+  </body>
+</html>
