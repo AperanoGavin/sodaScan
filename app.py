@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import requests
 
 app = Flask(__name__)
@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return 'Hello, World!'
+
+@app.route('/form')
+def form():
+    return render_template('form.html')
 
 @app.route('/scan', methods=['POST'])
 def scan():
