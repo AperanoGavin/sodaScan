@@ -7,6 +7,12 @@ app = Flask(__name__)
 def form():
     return render_template('form.html')
 
+
+@app.route('/abdoutest')
+def abdou():
+    return render_template('test.html')
+
+
 @app.route('/scan', methods=['POST'])
 def scan():
     barcode = request.form['barcode']
@@ -20,4 +26,4 @@ def get_product_info(barcode):
     return data
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=90)
+    app.run(debug=True, host='0.0.0.0', port=90 , ssl_context=('/certs/fullchain.pem', '/certs/privkey.pem'))
