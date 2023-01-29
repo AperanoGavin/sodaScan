@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  web_python_soda:
+    build:  .
+    ports:
+      - "90:90"
+    restart: always
+    volumes:
+      - .:/app
+    links:
+      - db_soda
+  db_soda:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root_soda
+      MYSQL_DATABASE: python_soda
+      MYSQL_USER: python_soda
+      MYSQL_PASSWORD: python_soda
