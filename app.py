@@ -4,10 +4,6 @@ import requests
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return 'Hello, World!'
-
-@app.route('/form')
 def form():
     return render_template('form.html')
 
